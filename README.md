@@ -313,7 +313,7 @@ EMAs and counters).
 ---
 
 ## Citation
-
+```
 @inproceedings{huang2026gradientstabilizer,
   title     = {{GradientStabilizer}: Fix the Norm, Not the Gradient},
   author    = {Huang, Tianjin and Wang, Zhangyang and Hu, Haotian and Zhang, Zhenyu and Jin, Gaojie and Li, Xiang and Shen, Li and Shang, Jiaxing and Chen, Tianlong and Li, Ke and Liu, Lu and Wen, Qingsong and Liu, Shiwei},
@@ -324,6 +324,7 @@ EMAs and counters).
   eprint    = {2502.17055},
   primaryClass = {cs.LG}
 }
+```
 
 ---
 
