@@ -204,14 +204,6 @@ settings are kept (load does not overwrite hyperparameters).
 | `eps`             | `1e-12`  | Numerical floor in the divisions and sqrt.                              |
 | `bias_correction` | `True`   | Adam-style `1 / (1 - gamma**step)` correction.                          |
 
-Recommended starting points by workload:
-
-- **Vision / discriminative training:** defaults.
-- **LLM pre-training:** defaults; consider `gamma1 ∈ [0.6, 0.9]` for
-  smoother long-horizon adaptation.
-- **Fine-tuning / few-step adaptation:** smaller `gamma2` (e.g.
-  `0.99`) so the second-moment EMA converges faster on short runs.
-
 
 ## Combining with gradient accumulation
 
