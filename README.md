@@ -1,4 +1,4 @@
-# SPAM
+# GradientStabilizer
 This repo contains the pre-release version of GradientStabilizer, proposed by [GradientStabilizer: Fix the Norm, Not the Gradient](https://arxiv.org/pdf/2502.17055).
 
 We introduce  GradientStabilizer, a lightweight, drop-in gradient transform that preserves the instantaneous gradient direction while replacing the update magnitude with a statistically stabilized estimate derived from running gradient-norm statistics.
