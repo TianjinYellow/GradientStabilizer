@@ -47,7 +47,7 @@ Requirements: `torch >= 1.13`. No other dependencies.
 
 ```python
 import torch
-from GradientStabilizer import GSWrapper
+from gradient_stabilizer import GSWrapper
 
 model     = MyModel().cuda()
 optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3,
@@ -74,7 +74,7 @@ the optimiser internally — call `GradientStabilizer` manually between
 
 ```python
 import torch
-from GradientStabilizer import GradientStabilizer
+from gradient_stabilizer import GradientStabilizer
 
 model      = MyModel().cuda()
 optimizer  = torch.optim.AdamW(model.parameters(), lr=1e-3)
@@ -112,7 +112,7 @@ modification. The standard pattern:
 ```python
 import torch
 from torch.amp import autocast, GradScaler
-from GradientStabilizer import GSWrapper
+from gradient_stabilizer import GradientStabilizer, GSWrapper
 
 scaler    = GradScaler("cuda")
 optimizer = GSWrapper(
