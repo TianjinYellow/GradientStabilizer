@@ -65,6 +65,43 @@ That is the entire change relative to a vanilla AdamW loop. LR
 schedulers, gradient hooks, and DDP all see the wrapped optimiser as
 an ordinary `Optimizer`.
 
+## Alternative: using `GradientStabilizer` directly
+
+If you cannot wrap your optimiser — for example when integrating with
+HuggingFace `Trainer`, DeepSpeed, or any framework that constructs
+the optimiser internally — call `GradientStabilizer` manually between
+`backward()` and `step()`:
+
+```python
+import torch
+from GradientStabilizer import GradientStabilizer
+
+model      = MyModel().cuda()
+optimizer  = torch.optim.AdamW(model.parameters(), lr=1e-3)
+stabilizer = GradientStabilizer(gamma1=0.6, gamma2=0.999)
+
+for batch in loader:
+    optimizer.zero_grad(set_to_none=True)
+    loss = loss_fn(model(batch), target)
+    loss.backward()
+    stabilizer(optimizer)          # rescales p.grad in place
+    optimizer.step()
+```
+
+The stabilizer accepts three input forms; pick whichever is most
+convenient:
+
+```python
+stabilizer(optimizer)                # iterates optimizer.param_groups
+stabilizer(optimizer.param_groups)   # equivalent
+stabilizer(model.parameters())       # any iterable of nn.Parameter
+```
+
+All three apply the same per-parameter rescaling. The
+optimizer-aware forms are preferable when you have parameter groups
+with different learning rates or weight decays, since they preserve
+group ordering.
+
 ---
 
 ## Mixed precision (AMP)
